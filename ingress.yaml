@@ -1,35 +1,39 @@
+(base) BANL16b1899e5:demo-concourse-flux-master akulkarni7$ vi ingress.yaml 
+
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: bluegreen-demo-preview
-  namespace: bluegreen-demo
-  annotations:
-    ingress.kubernetes.io/proxy-body-size: 100M
-    kubernetes.io/ingress.class: nginx
-    ingress.kubernetes.io/app-root: /
+ name: bluegreen-demo-preview
+ namespace: bluegreen-demo
+ annotations:
+  ingress.kubernetes.io/rewrite-target: /
+  ingress.kubernetes.io/proxy-body-size: 100M
+  kubernetes.io/ingress.class: nginx
+  ingress.kubernetes.io/app-root: /
 spec:
-  rules:
+ rules:
   - http:
-      paths:
+     paths:
       - path: /
         backend:
-          serviceName: bluegreen-demo-preview
-          servicePort: 80
+         serviceName: bluegreen-demo-preview
+         servicePort: 80
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-    name: bluegreen-demo
-    namespace: bluegreen-demo
-    annotations:
-      ingress.kubernetes.io/proxy-body-size: 100M
-      kubernetes.io/ingress.class: nginx
-      ingress.kubernetes.io/app-root: /
+ name: bluegreen-demo
+ namespace: bluegreen-demo
+ annotations:
+  ingress.kubernetes.io/rewrite-target: /
+  ingress.kubernetes.io/proxy-body-size: 100M
+  kubernetes.io/ingress.class: nginx
+  ingress.kubernetes.io/app-root: /
 spec:
-    rules:
-    - http:
-        paths:
-        - path: /
-        backend:
-            serviceName: bluegreen-demo
-            servicePort: 80
+ rules:
+  - http:
+     paths:
+     - path: /
+       backend:
+         serviceName: bluegreen-demo
+         servicePort: 80
