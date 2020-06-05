@@ -7,7 +7,7 @@ metadata:
     app: bluegreen-demo
 spec:
   ports:
-  - port: 80
+  - port: 8088
     targetPort: http
     protocol: TCP
     name: http
